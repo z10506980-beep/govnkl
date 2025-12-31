@@ -1,0 +1,802 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Официальный информационный портал ГИБДД г. Мирный</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-blue: #0039a6;
+            --accent-red: #d52b1e;
+            --dark-blue: #0a2351;
+            --light-gray: #f5f8fa;
+            --medium-gray: #e9ecef;
+            --text-dark: #212529;
+            --white: #ffffff;
+            --success-green: #28a745;
+            --warning-orange: #ffc107;
+            --border-color: #dee2e6;
+        }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        body {
+            background-color: var(--light-gray);
+            color: var(--text-dark);
+            line-height: 1.6;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        /* Header */
+        header {
+            background: linear-gradient(135deg, var(--dark-blue) 0%, var(--primary-blue) 100%);
+            color: var(--white);
+            padding: 25px 0;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+        .logo-section {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+        .logo-icon {
+            font-size: 3.5rem;
+            color: var(--accent-red);
+        }
+        .logo-text h1 {
+            font-size: 1.8rem;
+            font-weight: 700;
+            margin-bottom: 5px;
+        }
+        .logo-text p {
+            font-size: 1rem;
+            opacity: 0.9;
+        }
+        .header-badge {
+            background-color: rgba(255, 255, 255, 0.15);
+            padding: 10px 20px;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 0.9rem;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+        /* Navigation */
+        nav {
+            background-color: var(--white);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0;
+        }
+        .nav-links {
+            display: flex;
+            list-style: none;
+            flex-grow: 1;
+        }
+        .nav-links li {
+            flex: 1;
+            text-align: center;
+        }
+        .nav-links a {
+            display: block;
+            padding: 18px 15px;
+            text-decoration: none;
+            color: var(--dark-blue);
+            font-weight: 600;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            border-bottom: 3px solid transparent;
+        }
+        .nav-links a:hover, .nav-links a.active {
+            background-color: var(--light-gray);
+            color: var(--primary-blue);
+            border-bottom: 3px solid var(--accent-red);
+        }
+        .nav-actions {
+            display: flex;
+            gap: 10px;
+        }
+        /* Main Content */
+        main {
+            padding: 40px 0;
+        }
+        .page-header {
+            margin-bottom: 40px;
+        }
+        .page-header h2 {
+            font-size: 2.2rem;
+            color: var(--dark-blue);
+            margin-bottom: 15px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid var(--accent-red);
+            display: inline-block;
+        }
+        .page-header p {
+            font-size: 1.1rem;
+            max-width: 800px;
+            color: var(--text-dark);
+        }
+        /* Card Layout */
+        .card-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 30px;
+            margin-bottom: 50px;
+        }
+        .info-card {
+            background-color: var(--white);
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border-top: 5px solid var(--primary-blue);
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+        }
+        .info-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+        }
+        .card-header {
+            padding: 25px 25px 15px;
+            border-bottom: 1px solid var(--medium-gray);
+        }
+        .card-header h3 {
+            font-size: 1.5rem;
+            color: var(--dark-blue);
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        .card-header i {
+            color: var(--primary-blue);
+        }
+        .card-body {
+            padding: 20px 25px;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+        }
+        .card-body p {
+            margin-bottom: 20px;
+            color: var(--text-dark);
+            line-height: 1.7;
+        }
+        /* Toggle Content */
+        .toggle-btn {
+            background-color: var(--primary-blue);
+            color: var(--white);
+            border: none;
+            padding: 12px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            transition: background-color 0.3s ease;
+            margin-top: auto;
+            width: 100%;
+        }
+        .toggle-btn:hover {
+            background-color: var(--dark-blue);
+        }
+        .toggle-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.5s ease, padding 0.3s ease;
+            background-color: var(--light-gray);
+            border-radius: 5px;
+            margin-top: 0;
+        }
+        .toggle-content.active {
+            max-height: 1000px;
+            padding: 20px;
+            margin-top: 20px;
+        }
+        .toggle-content h4 {
+            color: var(--dark-blue);
+            margin-bottom: 15px;
+            font-size: 1.2rem;
+        }
+        .toggle-content ul, .toggle-content ol {
+            padding-left: 20px;
+            margin-bottom: 20px;
+        }
+        .toggle-content li {
+            margin-bottom: 10px;
+            line-height: 1.6;
+        }
+        /* Table */
+        .table-container {
+            overflow-x: auto;
+            margin: 20px 0;
+        }
+        .info-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.95rem;
+        }
+        .info-table th {
+            background-color: var(--dark-blue);
+            color: var(--white);
+            padding: 15px;
+            text-align: left;
+            font-weight: 600;
+        }
+        .info-table td {
+            padding: 15px;
+            border-bottom: 1px solid var(--medium-gray);
+        }
+        .info-table tr:nth-child(even) {
+            background-color: var(--light-gray);
+        }
+        .info-table tr:hover {
+            background-color: rgba(0, 57, 166, 0.05);
+        }
+        /* Alert Box */
+        .alert-box {
+            padding: 18px;
+            border-radius: 8px;
+            margin: 20px 0;
+            border-left: 5px solid var(--accent-red);
+            background-color: rgba(213, 43, 30, 0.05);
+            font-weight: 600;
+        }
+        .alert-box i {
+            margin-right: 10px;
+            color: var(--accent-red);
+        }
+        /* Footer */
+        footer {
+            background-color: var(--dark-blue);
+            color: var(--white);
+            padding: 40px 0 20px;
+            margin-top: 60px;
+        }
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+        .footer-section h3 {
+            font-size: 1.3rem;
+            margin-bottom: 20px;
+            color: var(--white);
+        }
+        .footer-section ul {
+            list-style: none;
+        }
+        .footer-section li {
+            margin-bottom: 12px;
+        }
+        .footer-section a {
+            color: rgba(255, 255, 255, 0.8);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+        .footer-section a:hover {
+            color: var(--white);
+            text-decoration: underline;
+        }
+        .footer-bottom {
+            text-align: center;
+            padding-top: 30px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 0.9rem;
+        }
+        /* Responsive */
+        @media (max-width: 992px) {
+            .card-grid {
+                grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            }
+        }
+        @media (max-width: 768px) {
+            .header-content {
+                flex-direction: column;
+                text-align: center;
+                gap: 20px;
+            }
+            .nav-container {
+                flex-direction: column;
+            }
+            .nav-links {
+                width: 100%;
+                flex-direction: column;
+            }
+            .nav-links li {
+                width: 100%;
+            }
+            .nav-actions {
+                margin-top: 15px;
+                width: 100%;
+                justify-content: center;
+            }
+            .page-header h2 {
+                font-size: 1.8rem;
+            }
+        }
+        @media (max-width: 576px) {
+            .card-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <div class="logo-section">
+                    <i class="fas fa-shield-alt logo-icon"></i>
+                    <div class="logo-text">
+                        <h1>ГИБДД г. Мирный</h1>
+                        <p>Официальный информационный портал Государственной инспекции безопасности дорожного движения</p>
+                    </div>
+                </div>
+                <div class="header-badge">
+                    <i class="fas fa-exclamation-triangle"></i> Для служебного пользования
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Navigation -->
+    <nav>
+        <div class="container nav-container">
+            <ul class="nav-links">
+                <li><a href="#guide" class="active"><i class="fas fa-book"></i> Памятки</a></li>
+                <li><a href="#schedule"><i class="fas fa-calendar-alt"></i> График работы</a></li>
+                <li><a href="#codes"><i class="fas fa-walkie-talkie"></i> Коды рации</a></li>
+                <li><a href="#accident"><i class="fas fa-car-crash"></i> Оформление ДТП</a></li>
+                <li><a href="#prohibition"><i class="fas fa-ban"></i> Запреты</a></li>
+            </ul>
+            <div class="nav-actions">
+                <button class="toggle-btn" id="toggleAllBtn" style="padding: 10px 15px;">
+                    <i class="fas fa-expand-alt"></i> Развернуть все
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="container">
+        <div class="page-header">
+            <h2><i class="fas fa-info-circle"></i> Информационный раздел для сотрудников</h2>
+            <p>Данный раздел содержит официальные памятки, инструкции, графики работы и коды рации для сотрудников ГИБДД г. Мирный.</p>
+        </div>
+
+        <!-- Основные памятки -->
+        <section id="guide">
+            <div class="card-grid">
+                <div class="info-card">
+                    <div class="card-header">
+                        <h3><i class="fas fa-clipboard-check"></i> Порядок остановки ТС</h3>
+                    </div>
+                    <div class="card-body">
+                        <p>Стандартная процедура остановки транспортного средства для проверки документов и проведения досмотра.</p>
+                        <button class="toggle-btn" data-target="guide1-content">
+                            <i class="fas fa-chevron-down"></i> Показать инструкцию
+                        </button>
+                        <div class="toggle-content" id="guide1-content">
+                            <p>Согласно действующему Федеральному Закону "О полиции", проверить документы, удостоверяющие личность Вы имеете право, в случае, если имеется основание подозревать граждан в совершении преступления или административного правонарушения (ориентировка на личность или транспортное средство).</p>
+                            <ol>
+                                <li>Остановка ТС производится с помощью звукового сигнала Сигнально-голосового устройства (СГУ).</li>
+                                <li>После остановки подойти к окну, постучаться если оно закрыто.</li>
+                                <li>Представиться, предоставить удостоверение лишь в случае прямого требования от гражданина.</li>
+                                <li>Объяснить причину остановки.</li>
+                            </ol>
+                            <div class="alert-box">
+                                <i class="fas fa-megaphone"></i> Для остановки транспортного средства преступника рекомендуется использовать мегафон, которым оборудован каждый патрульный автомобиль МВД. Сотрудник обязан выдать предупреждение об остановке в зоне видимости никнейма игрока.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Карточка для процедуры погони -->
+                <div class="info-card">
+                    <div class="card-header">
+                        <h3><i class="fas fa-running"></i> Процедура преследования</h3>
+                    </div>
+                    <div class="card-body">
+                        <p>Поэтапный порядок действий при автомобильной погоне, включая предупреждения и применение оружия.</p>
+                        <button class="toggle-btn" data-target="guide2-content">
+                            <i class="fas fa-chevron-down"></i> Показать инструкцию
+                        </button>
+                        <div class="toggle-content" id="guide2-content">
+                            <ol>
+                                <li>В любой погоне дать не меньше трёх предупреждений об остановке и одно предупреждение об открытии огня. Запрещено сразу предупреждать об открытии огня.</li>
+                                <li>Предупреждения даются с интервалом в 30 секунд.</li>
+                                <li>После всех предупреждений — предупредительный выстрел в воздух.</li>
+                                <li>Спустя 10-15 секунд открыть огонь по колесам ТС (при наличии причины для применения оружия).</li>
+                                <li>При игнорировании стрельбы по колесам или создании угрозы жизни — огонь по двигателю.</li>
+                            </ol>
+                            <div class="alert-box">
+                                <i class="fas fa-exclamation-triangle"></i> <strong>Исключение:</strong> В случае наезда/убийства гражданского лица и/или многократного тарана гражданских автомобилей разрешено открыть огонь по двигателю автомобиля без стрельбы в воздух.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- График работы -->
+        <section id="schedule">
+            <h2 class="page-header"><i class="fas fa-calendar-alt"></i> График работы и обработка вызовов</h2>
+            <div class="card-grid">
+                <div class="info-card">
+                    <div class="card-header">
+                        <h3><i class="fas fa-clock"></i> Единый рабочий график</h3>
+                    </div>
+                    <div class="card-body">
+                        <p>Установленные часы работы и порядок обработки вызовов для сотрудников ГИБДД г. Мирный.</p>
+                        <button class="toggle-btn" data-target="schedule-content">
+                            <i class="fas fa-chevron-down"></i> Показать график
+                        </button>
+                        <div class="toggle-content" id="schedule-content">
+                            <div class="table-container">
+                                <table class="info-table">
+                                    <thead>
+                                        <tr>
+                                            <th>День недели</th>
+                                            <th>Время работы</th>
+                                            <th>Порядок обработки вызовов</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td><strong>Понедельник - Пятница</strong> (будни)</td>
+                                            <td>10:00 - 18:00</td>
+                                            <td>В срочном порядке без ожидания</td>
+                                        </tr>
+                                        <tr>
+                                            <td rowspan="2"></td>
+                                            <td>10:00 - 18:00 и до 20:00</td>
+                                            <td>Обработка в течение 5 минут (сотрудник, сдавший смену, обязан вернуться)</td>
+                                        </tr>
+                                        <tr>
+                                            <td>20:00 - 10:00</td>
+                                            <td>По усмотрению сотрудника (желательно обработать, но не обязательно)</td>
+                                        </tr>
+                                        <tr>
+                                            <td><strong>Суббота</strong></td>
+                                            <td>10:00 - 16:00</td>
+                                            <td>В срочном порядке без ожидания</td>
+                                        </tr>
+                                        <tr>
+                                            <td><strong>Воскресенье</strong> (выходной)</td>
+                                            <td>—</td>
+                                            <td>Обработка в течение 5 минут (сотрудник вне смены обязан вернуться на работу)</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Коды рации -->
+        <section id="codes">
+            <h2 class="page-header"><i class="fas fa-broadcast-tower"></i> Коды докладов в рацию</h2>
+            <div class="card-grid">
+                <div class="info-card">
+                    <div class="card-header">
+                        <h3><i class="fas fa-walkie-talkie"></i> Волна организации (/r)</h3>
+                    </div>
+                    <div class="card-body">
+                        <p>Формат и коды для докладов на внутренней волне подразделения ГИБДД.</p>
+                        <button class="toggle-btn" data-target="radio-content">
+                            <i class="fas fa-chevron-down"></i> Показать коды
+                        </button>
+                        <div class="toggle-content" id="radio-content">
+                            <h4>Патрулирование:</h4>
+                            <ul>
+                                <li><strong>Код - 11:</strong> Выехал в патрулирование города. Пример: <code>/r [ОБ-10/ОСР-10] Код - 11.</code></li>
+                                <li><strong>Код - 12:</strong> Продолжаю патрулировать город, состояние стабильно.</li>
+                                <li><strong>Код - 13:</strong> Закончил патрулирование.</li>
+                            </ul>
+                            <h4>Служба на посту:</h4>
+                            <ul>
+                                <li><strong>Код - 21:</strong> Заступил на пост. Пример: <code>/r [ОБ-10/ОСР-10] Пост: ДПС-М-1. Код - 21.</code></li>
+                                <li><strong>Код - 22:</strong> Нахожусь на посту, состояние стабильно.</li>
+                                <li><strong>Код - 23:</strong> Покинул пост.</li>
+                            </ul>
+                            <h4>Обработка вызова:</h4>
+                            <ul>
+                                <li><strong>Код - 1:</strong> Принял вызов, отправляюсь на обработку.</li>
+                                <li><strong>Код - 2:</strong> Прибыл на место вызова, начинаю оформление.</li>
+                                <li><strong>Код - 3:</strong> Вызов обработан, покинул место оформления.</li>
+                                <li><strong>Код - 4:</strong> Вызов ложный.</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="info-card">
+                    <div class="card-header">
+                        <h3><i class="fas fa-car-chase"></i> Коды при автомобильной погоне</h3>
+                    </div>
+                    <div class="card-body">
+                        <p>Специальные коды для координации действий во время преследования транспортного средства.</p>
+                        <button class="toggle-btn" data-target="chase-content">
+                            <i class="fas fa-chevron-down"></i> Показать коды
+                        </button>
+                        <div class="toggle-content" id="chase-content">
+                            <ul>
+                                <li><strong>Код - 10-1:</strong> Начинаю погоню.</li>
+                                <li><strong>Код - 10-2:</strong> Продолжаю погоню, разрешены специальные маневры.</li>
+                                <li><strong>Код - 10-3:</strong> Продолжаю погоню, разрешен огонь по колёсам.</li>
+                                <li><strong>Код - 10-4:</strong> Продолжаю погоню, разрешен огонь по двигателю.</li>
+                                <li><strong>Код - 10-5:</strong> Транспортное средство остановлено, переходим к пешей погоне.</li>
+                                <li><strong>Код - 10-6:</strong> Погоня окончена успешно, всем экипажам отбой.</li>
+                                <li><strong>Код - 10-7:</strong> Погоня окончена, транспортное средство скрылось.</li>
+                            </ul>
+                            <p><strong>Пример доклада:</strong><br>
+                            <code>/r [ОБ-10/ОСР-10] Код - 10-1. Черный мерседес майбах полностью тонированный и без ГРЗ. Район банка города Мирный.</code></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Оформление ДТП -->
+        <section id="accident">
+            <h2 class="page-header"><i class="fas fa-file-alt"></i> Оформление дорожно-транспортных происшествий</h2>
+            <div class="card-grid">
+                <div class="info-card">
+                    <div class="card-header">
+                        <h3><i class="fas fa-car-crash"></i> ДТП без пострадавших</h3>
+                    </div>
+                    <div class="card-body">
+                        <p>Пошаговый алгоритм оформления дорожного инцидента, в котором нет пострадавших лиц.</p>
+                        <button class="toggle-btn" data-target="accident1-content">
+                            <i class="fas fa-chevron-down"></i> Показать процедуру
+                        </button>
+                        <div class="toggle-content" id="accident1-content">
+                            <ol>
+                                <li>Прибыв на место, убедиться в отсутствии пострадавших.</li>
+                                <li>Взять документы у участников ДТП.</li>
+                                <li>Выслушать версии произошедшего.</li>
+                                <li>Запросить запись с видеорегистратора.</li>
+                                <li>При отсутствии записи сделать зарисовку ДТП и отправить граждан в ГИБДД для разбирательств.</li>
+                                <li>После просмотра записи сделать схему ДТП и заполнить бланк осмотра места ДТП (отыгровка: <code>/me сделал схему места ДТП</code>).</li>
+                                <li>Вынести вердикт, объяснить, кто прав, а кто виноват.</li>
+                                <li>Выписать административный протокол виновнику (отыгровка: <code>/me внёс необходимую информацию в административный протокол</code>).</li>
+                                <li>Передать протокол на подпись виновнику.</li>
+                            </ol>
+                            <div class="alert-box">
+                                <i class="fas fa-exclamation-circle"></i> В случае отсутствия доказательств (записи) ДТП продолжать RP-ситуацию нельзя, так как нарушителя будет невозможно установить.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="info-card">
+                    <div class="card-header">
+                        <h3><i class="fas fa-ambulance"></i> ДТП с пострадавшими</h3>
+                    </div>
+                    <div class="card-body">
+                        <p>Алгоритм действий при дорожном происшествии с наличием пострадавших граждан.</p>
+                        <button class="toggle-btn" data-target="accident2-content">
+                            <i class="fas fa-chevron-down"></i> Показать процедуру
+                        </button>
+                        <div class="toggle-content" id="accident2-content">
+                            <ol>
+                                <li>Прибыв на место, убедиться в наличии пострадавших.</li>
+                                <li>Вызвать карету скорой медицинской помощи.</li>
+                                <li>Взять документы у участников ДТП.</li>
+                                <li>Сделать схему ДТП и заполнить бланк осмотра места ДТП (отыгровка: <code>/me сделал схему места ДТП</code>).</li>
+                                <li>Отправить пострадавшего в больницу, а другого участника в ГИБДД для дальнейших разбирательств.</li>
+                            </ol>
+                            <div class="alert-box">
+                                <i class="fas fa-exclamation-circle"></i> В данном случае продолжать RP-ситуацию нельзя, так как одного из участников транспортируют в больницу.
+                            </div>
+                            <p><strong>Примечание:</strong> Оформление ДТП может быть использовано в рапорте на повышение. Фиксируйте принятие вызова и краткое оформление.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Запреты -->
+        <section id="prohibition">
+            <h2 class="page-header"><i class="fas fa-ban"></i> Список основных запретов</h2>
+            <div class="info-card">
+                <div class="card-header">
+                    <h3><i class="fas fa-gavel"></i> Запрещённые действия для сотрудников</h3>
+                </div>
+                <div class="card-body">
+                    <p>Перечень действий, которые строго запрещены для сотрудников ГИБДД при выполнении служебных обязанностей.</p>
+                    <button class="toggle-btn" data-target="prohibition-content">
+                        <i class="fas fa-chevron-down"></i> Показать список запретов
+                    </button>
+                    <div class="toggle-content" id="prohibition-content">
+                        <ul>
+                            <li>Открывать огонь по гражданским.</li>
+                            <li>Открывать огонь без выполнения предупреждений и соблюдения требований.</li>
+                            <li>Открывать огонь в массовом скоплении людей.</li>
+                            <li>Использовать табельное и огнестрельное оружие против гражданских лиц, если те не предоставляют угрозу для жизни мирных граждан и сотрудников.</li>
+                            <li>Подрезать транспорт преступника, если не прошло 3 минут с начала погони (возможны погрешности в 10 секунд). До истечения данного срока, сотрудник обязан следовать за преступником и вызывать подкрепление.</li>
+                            <li>Намеренно таранить транспорт граждан и преступников, если те не останавливаются.</li>
+                            <li>Останавливать общественный транспорт (исключения: автобусы, такси и маршрутные такси).</li>
+                        </ul>
+                        <div class="alert-box">
+                            <i class="fas fa-star"></i> <strong>Исключение для подрезов:</strong> Если гражданское лицо представляет угрозу для жизни мирных граждан и сотрудников, подрезы разрешаются с целью оперативной остановки транспорта.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3><i class="fas fa-map-marker-alt"></i> Контакты</h3>
+                    <ul>
+                        <li><i class="fas fa-building"></i> ГИБДД г. Мирный</li>
+                        <li><i class="fas fa-phone"></i> Служебная связь</li>
+                        <li><i class="fas fa-envelope"></i> Внутренняя почта</li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3><i class="fas fa-link"></i> Полезные разделы</h3>
+                    <ul>
+                        <li><a href="#guide">Служебные памятки</a></li>
+                        <li><a href="#codes">Коды рации</a></li>
+                        <li><a href="#accident">Оформление ДТП</a></li>
+                        <li><a href="#prohibition">Список запретов</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3><i class="fas fa-shield-alt"></i> Для служебного пользования</h3>
+                    <p>Информация, размещенная на данном портале, предназначена исключительно для сотрудников ГИБДД г. Мирный и является конфиденциальной.</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>© 2023 Официальный информационный портал ГИБДД г. Мирный. Все права защищены.</p>
+                <p>Версия 2.1 | Последнее обновление: декабрь 2023</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Функция для переключения видимости контента
+            const toggleButtons = document.querySelectorAll('.toggle-btn');
+            const toggleAllBtn = document.getElementById('toggleAllBtn');
+            let allExpanded = false;
+
+            toggleButtons.forEach(button => {
+                // Пропускаем кнопку "Развернуть все"
+                if (button.id === 'toggleAllBtn') return;
+
+                button.addEventListener('click', function() {
+                    const targetId = this.getAttribute('data-target');
+                    const content = document.getElementById(targetId);
+                    const icon = this.querySelector('i');
+
+                    content.classList.toggle('active');
+
+                    if (content.classList.contains('active')) {
+                        this.innerHTML = '<i class="fas fa-chevron-up"></i> Скрыть инструкцию';
+                        this.style.backgroundColor = '#0a2351'; // Темно-синий
+                    } else {
+                        this.innerHTML = '<i class="fas fa-chevron-down"></i> Показать инструкцию';
+                        this.style.backgroundColor = ''; // Возвращаем исходный цвет
+                    }
+                });
+            });
+
+            // Кнопка "Развернуть все / Свернуть все"
+            if (toggleAllBtn) {
+                toggleAllBtn.addEventListener('click', function() {
+                    const allContents = document.querySelectorAll('.toggle-content');
+                    const allToggleBtns = document.querySelectorAll('.toggle-btn:not(#toggleAllBtn)');
+                    const icon = this.querySelector('i');
+
+                    allExpanded = !allExpanded;
+
+                    allContents.forEach(content => {
+                        if (allExpanded) {
+                            content.classList.add('active');
+                        } else {
+                            content.classList.remove('active');
+                        }
+                    });
+
+                    allToggleBtns.forEach(btn => {
+                        if (allExpanded) {
+                            btn.innerHTML = '<i class="fas fa-chevron-up"></i> Скрыть инструкцию';
+                            btn.style.backgroundColor = '#0a2351';
+                        } else {
+                            btn.innerHTML = '<i class="fas fa-chevron-down"></i> Показать инструкцию';
+                            btn.style.backgroundColor = '';
+                        }
+                    });
+
+                    if (allExpanded) {
+                        this.innerHTML = '<i class="fas fa-compress-alt"></i> Свернуть все';
+                    } else {
+                        this.innerHTML = '<i class="fas fa-expand-alt"></i> Развернуть все';
+                    }
+                });
+            }
+
+            // Плавная прокрутка для навигации
+            document.querySelectorAll('nav a').forEach(anchor => {
+                anchor.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const targetId = this.getAttribute('href');
+                    const targetSection = document.querySelector(targetId);
+
+                    if (targetSection) {
+                        // Обновляем активный пункт меню
+                        document.querySelectorAll('nav a').forEach(link => {
+                            link.classList.remove('active');
+                        });
+                        this.classList.add('active');
+
+                        // Прокрутка к секции
+                        window.scrollTo({
+                            top: targetSection.offsetTop - 80,
+                            behavior: 'smooth'
+                        });
+                    }
+                });
+            });
+
+            // Автоматическое обновление активного пункта меню при прокрутке
+            window.addEventListener('scroll', function() {
+                const sections = document.querySelectorAll('section');
+                const navLinks = document.querySelectorAll('nav a');
+
+                let currentSectionId = '';
+                sections.forEach(section => {
+                    const sectionTop = section.offsetTop - 100;
+                    const sectionHeight = section.clientHeight;
+                    if (scrollY >= sectionTop && scrollY < sectionTop + sectionHeight) {
+                        currentSectionId = '#' + section.getAttribute('id');
+                    }
+                });
+
+                navLinks.forEach(link => {
+                    link.classList.remove('active');
+                    if (link.getAttribute('href') === currentSectionId) {
+                        link.classList.add('active');
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>
